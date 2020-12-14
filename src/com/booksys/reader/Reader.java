@@ -1,7 +1,7 @@
 /** 
 * @File Reader.java
 * @Author Aurora_JC
-* @Time 2020Äê12ÔÂ14ÈÕ ÉÏÎç10:33:57 
+* @Time 2020ï¿½ï¿½12ï¿½ï¿½14ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10:33:57 
 * @Version 1.0
 * <p>Description:</p>
 */
@@ -29,6 +29,14 @@ public class Reader {
 	
 	public int getReaderLevel() {
 		return this.readerLevel;
+	}
+	
+	public void setReaderPasswd(String _newPasswd) {
+		this.readerPasswd = _newPasswd;
+	}
+	
+	public void setReaderLevel(int _newLevel) {
+		this.readerLevel = _newLevel;
 	}
 	
 	public boolean borrowBook() {
