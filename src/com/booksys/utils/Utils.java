@@ -1,7 +1,7 @@
 /** 
 * @File Utils.java
 * @Author Aurora_JC
-* @Time 2020Äê12ÔÂ14ÈÕ ÉÏÎç10:25:42 
+* @Time 2020ï¿½ï¿½12ï¿½ï¿½14ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10:25:42 
 * @Version 1.0
 * <p>Description:</p>
 */
@@ -13,17 +13,23 @@ import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.booksys.storage.LinkedList;
+import com.booksys.storage.Node;
+
 public class Utils {
-	public static boolean isBookNum(String s) {
-		String pattern = "ISBN\\s\\d\\d\\d-\\d-\\d\\d\\d-\\d\\d\\d\\d\\d-\\d";
+	public static boolean isBookNo(String s) {
+		String patternc1 = "ISBN\\s\\d\\d\\d-\\d-\\d\\d\\d-\\d\\d\\d\\d\\d-\\d";
+		String patternc2 = "ISBN\\s\\d\\d\\d-\\d-\\d\\d-\\d\\d\\d\\d\\d\\d-\\d";
 		
-		Pattern r = Pattern.compile(pattern);
-		Matcher m = r.matcher(s);
+		Pattern rc1 = Pattern.compile(patternc1);
+		Matcher mc1 = rc1.matcher(s);
+		Pattern rc2 = Pattern.compile(patternc2);
+		Matcher mc2 = rc2.matcher(s);
 		
-		return m.matches();
+		return mc1.matches() || mc2.matches();
 	}
 	
-	public static String recodePassword(String s) {
+	public static String recodePasswd(String s) {
 		byte[] digest = null;
 		
 		try {
@@ -34,5 +40,19 @@ public class Utils {
 		}
 		
 		return new BigInteger(1, digest).toString(16);
+	}
+	
+	public static int authentication(int _id, String _passwd, LinkedList l) {
+		Node now = l.searchNode(_id);
+		if (now != null) {
+			if (recodePasswd(_passwd).equals(now.getReaderData().getReaderPasswd())) {
+				if (now.getReaderData().getReaderLevel() == 1) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		}
+		return -1;
 	}
 }
