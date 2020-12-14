@@ -10,6 +10,8 @@ package com.booksys.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,6 +42,11 @@ public class Utils {
 		}
 		
 		return new BigInteger(1, digest).toString(16);
+	}
+	
+	public static String getCurrentTime() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return df.format(new Date());
 	}
 	
 	public static int authentication(int _id, String _passwd, LinkedList l) {
