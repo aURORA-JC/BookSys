@@ -24,6 +24,7 @@ import com.booksys.book.Book;
 import com.booksys.reader.Reader;
 import com.booksys.storage.LinkedList;
 import com.booksys.storage.Node;
+import com.booksys.utils.Utils;
 
 public class IOStream {
 	private static Document doc;
@@ -45,6 +46,7 @@ public class IOStream {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：书本信息读取完毕");
 	}
 	
 	public static void readerReader(LinkedList l) {
@@ -62,6 +64,7 @@ public class IOStream {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：读者信息读取完毕");
 	}
 	
 	public static void borrowReader(LinkedList l) {
@@ -78,6 +81,7 @@ public class IOStream {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：借书记录读取完毕");
 	}
 	
 	public static void bookAdder(Book b) {
@@ -97,6 +101,7 @@ public class IOStream {
 		total.addText(String.valueOf(b.getBookNum()));
 		
 		xmlSaver("Books.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：书本信息添加完毕");
 	}
 	
 	public static void readerAdder(Reader r) {
@@ -112,6 +117,7 @@ public class IOStream {
 		level.addText(String.valueOf(r.getReaderLevel()));
 		
 		xmlSaver("Readers.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：读者信息添加完毕");
 	}
 	
 	public static void borrowAdder(Reader r, Book b) {
@@ -125,6 +131,7 @@ public class IOStream {
 		id.addText(String.valueOf(r.getReaderId()));
 		
 		xmlSaver("Borrow.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：借书记录添加完毕");
 	}
 	
 	public static void bookDeleter(Book b) {
@@ -140,6 +147,7 @@ public class IOStream {
 		}
 		
 		xmlSaver("Books.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：书本信息删除完毕");
 	}
 	
 	public static void readerDeleter(Reader r) {
@@ -155,6 +163,7 @@ public class IOStream {
 		}
 		
 		xmlSaver("Readers.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：读者信息删除完毕");
 	}
 	
 	public static void borrowDeleter(Reader r, Book b) {
@@ -171,6 +180,7 @@ public class IOStream {
 		}
 		
 		xmlSaver("Borrows.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：借书记录删除完毕");
 	}
 	
 	public static void bookUpdater(Book b) {
@@ -194,6 +204,7 @@ public class IOStream {
 		}
 		
 		xmlSaver("Books.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：书本信息更新完毕");
 	}
 	
 	public static void readerUpdate(Reader r) {
@@ -217,6 +228,7 @@ public class IOStream {
 		}
 		
 		xmlSaver("Readers.xml");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：读者信息更新完毕");
 	}
 	
 	public static Document getDocument(String path) {
@@ -228,6 +240,7 @@ public class IOStream {
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：读取Document对象");
 		return doc;
 	}
 	
@@ -237,6 +250,7 @@ public class IOStream {
 			format.setEncoding("UTF-8");
 			XMLWriter writer = new XMLWriter(new FileWriter(path), format);
 			writer.write(doc);
+			System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：文件写入完毕");
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
