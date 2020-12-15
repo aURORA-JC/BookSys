@@ -1,7 +1,7 @@
 /** 
 * @File Book.java
 * @Author Aurora_JC
-* @Time 2020Äê12ÔÂ14ÈÕ ÉÏÎç9:41:18 
+* @Time 2020ï¿½ï¿½12ï¿½ï¿½14ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½9:41:18 
 * @Version 1.0
 * <p>Description:</p>
 */
@@ -15,6 +15,14 @@ public class Book {
 	private int bookInShopNum;
 	private int bookNum;
 
+	public Book(String _bookNo, String _bookName, String _bookAuthor, int _bookNum) {
+		this.bookNo = _bookNo;
+		this.bookName = _bookName;
+		this.bookAuthor = _bookAuthor;
+		this.bookNum = _bookNum;
+		this.bookInShopNum = this.bookNum;
+	}
+	
 	public Book(String _bookNo, String _bookName, String _bookAuthor, int _bookInShopNum, int _bookNum) {
 		this.bookNo = _bookNo;
 		this.bookName = _bookName;

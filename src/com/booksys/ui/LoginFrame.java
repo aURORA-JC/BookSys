@@ -8,15 +8,14 @@
 
 package com.booksys.ui;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 
+import com.booksys.data.Data;
 import com.booksys.io.IOStream;
 import com.booksys.storage.LinkedList;
 import com.booksys.utils.Utils;
@@ -27,9 +26,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LoginFrame extends JFrame {
+	private static final long serialVersionUID = -4020831753619395032L;
 	private JTextField usrNameField;
 	private JTextField passwdField;
-	static LinkedList rea = new LinkedList();
 
 	/**
 	 * Create the frame.
@@ -42,7 +41,7 @@ public class LoginFrame extends JFrame {
 		System.out.println("███████╗██║██████╔╝██║  ██║██║  ██║██║  ██║   ██║     ██╗   ");
 		System.out.println("╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝     ╚═╝   ");
 		System.out.println("=============================================================");
-		System.out.println("欢迎使用图书管理系统，Version 0.8.1 - " + Utils.getCurrentTime());
+		System.out.println("欢迎使用图书管理系统，Version 0.8.1 | " + Utils.getCurrentTime(""));
 		
 		getContentPane().setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		setTitle("图书管理系统");
@@ -72,15 +71,14 @@ public class LoginFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int id = Integer.parseInt(usrNameField.getText());
 				String pass = passwdField.getText();
-				switch(Utils.authentication(id, pass, rea)) {
+				switch(Utils.authentication(id, pass, Data.readerList)) {
 					case 1: {
-						System.out.println(" - 认证服务：读者登录");
+						
 					}break;
 					case 0: {
-						System.out.println(" - 认证服务：管理员登录");
+						
 					}break;
 					case -1: {
-						System.out.println(" - 认证服务：用户名密码错误");
 						JOptionPane.showMessageDialog(null, "用户名或密码错误", "认证失败", JOptionPane.ERROR_MESSAGE);
 					}break;
 				}
@@ -115,8 +113,8 @@ public class LoginFrame extends JFrame {
 		regBtn.setBounds(235, 215, 127, 25);
 		loginPanel.add(regBtn);
 		
-		IOStream.readerReader(rea);
-		System.out.println(" - 用户信息载入完成！");
-		System.out.println(" - 登录界面初始化完成！");
+		IOStream.readerReader(Data.readerList);
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | 用户信息载入完成");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | 登录界面初始化完成");
 	}
 }

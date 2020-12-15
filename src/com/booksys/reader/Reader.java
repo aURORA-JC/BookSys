@@ -38,16 +38,4 @@ public class Reader {
 	public void setReaderLevel(int _newLevel) {
 		this.readerLevel = _newLevel;
 	}
-	
-	public boolean borrowBook() {
-		return false;
-	}
-	
-	public boolean returnBook() {
-		return false;
-	}
-	
-	public void viewAll() {
-		
-	}
 }

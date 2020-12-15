@@ -44,8 +44,15 @@ public class Utils {
 		return new BigInteger(1, digest).toString(16);
 	}
 	
-	public static String getCurrentTime() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static String getCurrentTime(String f) {
+		SimpleDateFormat df = null;
+		if (f.equals("time")) {
+			df = new SimpleDateFormat("HH:mm:ss");
+		} else if (f.equals("day")) {
+			df = new SimpleDateFormat("yyyy-MM-dd");
+		} else {
+			df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		}
 		return df.format(new Date());
 	}
 	
@@ -54,12 +61,15 @@ public class Utils {
 		if (now != null) {
 			if (recodePasswd(_passwd).equals(now.getReaderData().getReaderPasswd())) {
 				if (now.getReaderData().getReaderLevel() == 1) {
+					System.out.println(" - " + Utils.getCurrentTime("time") + " | 认证服务：读者登录");
 					return 1;
 				} else {
+					System.out.println(" - " + Utils.getCurrentTime("time") + " | 认证服务：管理员登录");
 					return 0;
 				}
 			}
 		}
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | 认证服务：用户名或密码错误");
 		return -1;
 	}
 }
