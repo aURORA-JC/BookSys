@@ -101,6 +101,11 @@ public class ReaderFrame extends JFrame {
 		
 		JMenuItem aboutItem = new JMenuItem("关于");
 		aboutItem.setIconTextGap(0);
+		aboutItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AboutDialog().init();
+			}
+		});
 		aboutItem.setIcon(null);
 		helpMenu.add(aboutItem);
 		
