@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import com.booksys.operation.Operation;
 import com.booksys.storage.LinkedList;
+import com.booksys.utils.Utils;
 
 public class Data {
 	public static LinkedList bookList = new LinkedList();
@@ -43,5 +44,6 @@ public class Data {
 		Operation.getBookData(bookList);
 		Operation.getReaderDate(readerList);
 		Operation.getBorrowData(borrowList);
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | 前端服务：数据载入完毕");
 	}
 }
