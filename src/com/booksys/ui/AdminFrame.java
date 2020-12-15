@@ -73,6 +73,11 @@ public class AdminFrame extends JFrame {
 		
 		JMenuItem exitItem = new JMenuItem("退出");
 		exitItem.setIcon(null);
+		exitItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		sysMenu.add(exitItem);
 		
 		JMenu helpMenu = new JMenu("帮助");

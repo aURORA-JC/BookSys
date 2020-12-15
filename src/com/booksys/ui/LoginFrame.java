@@ -109,7 +109,7 @@ public class LoginFrame extends JFrame {
 		JButton regBtn = new JButton("注册");
 		regBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new RegisteDialog().init();
 			}
 		});
 		regBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
