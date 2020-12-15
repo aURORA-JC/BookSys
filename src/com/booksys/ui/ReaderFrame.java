@@ -88,6 +88,11 @@ public class ReaderFrame extends JFrame {
 		
 		JMenuItem exitItem = new JMenuItem("退出");
 		exitItem.setIcon(null);
+		exitItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		exitItem.setSelectedIcon(null);
 		sysMenu.add(exitItem);
 		
