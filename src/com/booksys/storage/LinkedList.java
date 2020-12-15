@@ -70,7 +70,7 @@ public class LinkedList {
 		return -1;
 	}
 	
-	public int searchNodeIndex(int id) {
+	public int searchNodeIndex(long id) {
 		Node tmp = head;
 		int index = 1;
 		while (tmp != null) {
@@ -83,7 +83,7 @@ public class LinkedList {
 		return -1;
 	}
 	
-	public int searchNodeIndex(String s, int id) {
+	public int searchNodeIndex(String s, long id) {
 		Node tmp = head;
 		int index = 1;
 		while (tmp != null) {
@@ -107,7 +107,7 @@ public class LinkedList {
 		return null;
 	}
 	
-	public Node searchNode(int id) {
+	public Node searchNode(long id) {
 		Node tmp = head;
 		while (tmp != null) {
 			if (tmp.getReaderData().getReaderId() == id) {
@@ -118,7 +118,7 @@ public class LinkedList {
 		return null;
 	}
 	
-	public Node searchNode(String s, int id) {
+	public Node searchNode(String s, long id) {
 		Node tmp = head;
 		while (tmp != null) {
 			if (s.equals(tmp.getBookNo()) && tmp.getReaderNo() == id) {

@@ -65,7 +65,7 @@ public class Operation {
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | 前端服务：借阅信息载入完毕");
 	}
 	
-	public static void borrowBook(LinkedList borl, LinkedList bool, LinkedList real, String s, int id) {
+	public static void borrowBook(LinkedList borl, LinkedList bool, LinkedList real, String s, long id) {
 		Book book = bool.searchNode(s).getBookData();
 		Reader reader = real.searchNode(id).getReaderData(); 
 		borl.addNode(new Node(book.getBookNo(), reader.getReaderId()));
@@ -75,7 +75,7 @@ public class Operation {
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：借阅完毕");
 	}
 	
-	public static void returnBook(LinkedList borl, LinkedList bool, LinkedList real, String s, int id) {
+	public static void returnBook(LinkedList borl, LinkedList bool, LinkedList real, String s, long id) {
 		borl.deleteNode(borl.searchNodeIndex(s, id));
 		Book book = bool.searchNode(s).getBookData();
 		book.setBookInShopNum(book.getBookInShopNum() + 1);
@@ -99,7 +99,7 @@ public class Operation {
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：添加完毕");
 	}
 	
-	public static boolean createReader(LinkedList l, int id, String pass) {
+	public static boolean createReader(LinkedList l, long id, String pass) {
 		if (l.searchNode(id) == null) {
 			Reader reader = new Reader(id, Utils.recodePasswd(pass), 1);
 			l.addNode(new Node(reader));

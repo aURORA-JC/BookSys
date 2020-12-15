@@ -13,7 +13,7 @@ import com.booksys.reader.Reader;
 
 public class Node {
 	private String bookNo;
-	private int readerNo;
+	private long readerNo;
 	private Book bookData;
 	private Reader readerData;
 	private Node next;
@@ -26,7 +26,7 @@ public class Node {
 		this.readerData = _readerData;
 	}
 	
-	public Node(String _bookNo, int _readerNo) {
+	public Node(String _bookNo, long _readerNo) {
 		this.bookNo = _bookNo;
 		this.readerNo = _readerNo;
 	}
@@ -35,7 +35,7 @@ public class Node {
 		return this.bookNo;
 	}
 	
-	public int getReaderNo() {
+	public long getReaderNo() {
 		return this.readerNo;
 	}
 	

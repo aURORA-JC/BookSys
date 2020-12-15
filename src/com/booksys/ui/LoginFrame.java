@@ -70,7 +70,7 @@ public class LoginFrame extends JFrame {
 		JButton loginBtn = new JButton("登录");
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(usrNameField.getText());
+				long id = Long.parseLong(usrNameField.getText());
 				String pass = String.valueOf(passwdField.getPassword());
 				switch(Utils.authentication(id, pass, Data.readerList)) {
 					case 1: {
@@ -110,6 +110,7 @@ public class LoginFrame extends JFrame {
 		regBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new RegisteDialog().init();
+				dispose();
 			}
 		});
 		regBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));

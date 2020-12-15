@@ -56,7 +56,7 @@ public class Utils {
 		return df.format(new Date());
 	}
 	
-	public static int authentication(int _id, String _passwd, LinkedList l) {
+	public static int authentication(long _id, String _passwd, LinkedList l) {
 		Node now = l.searchNode(_id);
 		if (now != null) {
 			if (recodePasswd(_passwd).equals(now.getReaderData().getReaderPasswd())) {

@@ -94,7 +94,6 @@ public class AddBookDialog extends JDialog {
 		contentPanel.add(numLabel);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("取消");
@@ -103,6 +102,7 @@ public class AddBookDialog extends JDialog {
 						dispose();
 					}
 				});
+				buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
