@@ -43,6 +43,7 @@ public class AboutDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AboutDialog() {
+		setResizable(false);
 		setTitle("关于");
 		setBounds(100, 100, 450, 200);
 		getContentPane().setLayout(new BorderLayout());

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<readerlist>
-	<reader>
-		<id>4550</id>
-		<passwd>202cb962ac59075b964b07152d234b70</passwd>
-		<level>0</level>
-	</reader>
-	<reader>
-		<id>4551</id>
-		<passwd>202cb962ac59075b964b07152d234b70</passwd>
-		<level>1</level>
-	</reader>
-	<reader>
-		<id>4551</id>
-		<passwd>202cb962ac59075b964b07152d234b70</passwd>
-		<level>1</level>
-	</reader>
+
+<readerlist> 
+  <reader> 
+    <id>4550</id>  
+    <passwd>202cb962ac59075b964b07152d234b70</passwd>  
+    <level>0</level> 
+  </reader>  
+  <reader> 
+    <id>4551</id>  
+    <passwd>202cb962ac59075b964b07152d234b70</passwd>  
+    <level>1</level> 
+  </reader>  
+  <reader> 
+    <id>4551</id>  
+    <passwd>202cb962ac59075b964b07152d234b70</passwd>  
+    <level>1</level> 
+  </reader>  
 </readerlist>

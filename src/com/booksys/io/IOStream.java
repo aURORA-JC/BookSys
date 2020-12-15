@@ -54,7 +54,7 @@ public class IOStream {
 			Element root = doc.getRootElement();
 			List<Element> elements = root.elements("reader");
 			for (Element el : elements) {
-				int id = Integer.parseInt(el.elementText("id"));
+				Long id = Long.parseLong(el.elementText("id"));
 				String passwd = el.elementText("passwd");
 				int level = Integer.parseInt(el.elementText("level"));
 				l.addNode(new Node(new Reader(id, passwd, level)));
@@ -72,7 +72,7 @@ public class IOStream {
 			List<Element> elements = root.elements("ticket");
 			for (Element el : elements) {
 				String no = el.elementText("no");
-				int id = Integer.parseInt(el.elementText("id"));
+				long id = Long.parseLong(el.elementText("id"));
 				l.addNode(new Node(no, id));
 			}
 		} catch (NumberFormatException e) {
@@ -152,7 +152,7 @@ public class IOStream {
 		Element root = doc.getRootElement();
 		List<Element> elements = root.elements("reader");
 		for (Element el : elements) {
-			int id = Integer.parseInt(el.elementText("id"));
+			long id = Long.parseLong(el.elementText("id"));
 			if (id == r.getReaderId()) {
 				el.getParent().remove(el);
 				break;
@@ -209,7 +209,7 @@ public class IOStream {
 		Element root = doc.getRootElement();
 		List<Element> elements = root.elements("reader");
 		for (Element el : elements) {
-			int id = Integer.parseInt(el.elementText("id"));
+			long id = Long.parseLong(el.elementText("id"));
 			List<Element> chels = el.elements();
 			if (id == r.getReaderId()) {
 				for (Element chel : chels) {

@@ -9,17 +9,17 @@
 package com.booksys.reader; 
 
 public class Reader {
-	private int readerId;
+	private long readerId;
 	private String readerPasswd;
 	private int readerLevel;
 	
-	public Reader(int _readerId, String _readerPasswd, int _readerLevel) {
+	public Reader(long _readerId, String _readerPasswd, int _readerLevel) {
 		this.readerId = _readerId;
 		this.readerPasswd = _readerPasswd;
 		this.readerLevel = _readerLevel;
 	}
 	
-	public int getReaderId() {
+	public long getReaderId() {
 		return this.readerId;
 	}
 	
