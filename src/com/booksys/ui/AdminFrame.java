@@ -84,6 +84,11 @@ public class AdminFrame extends JFrame {
 		menuBar.add(helpMenu);
 		
 		JMenuItem aboutItem = new JMenuItem("关于");
+		aboutItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AboutDialog().init();
+			}
+		});
 		aboutItem.setIcon(null);
 		helpMenu.add(aboutItem);
 		
