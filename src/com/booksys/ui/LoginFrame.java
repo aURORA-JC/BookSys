@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ import com.booksys.data.Data;
 import com.booksys.io.IOStream;
 import com.booksys.utils.Utils;
 
+import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -30,11 +32,7 @@ public class LoginFrame extends JFrame {
 	private JTextField usrNameField;
 	private JPasswordField passwdField;
 
-	/**
-	 * Create the frame.
-	 */
-	public LoginFrame() {
-		this.setIconImage(new ImageIcon(LoginFrame.class.getResource("/com/booksys/ui/image/library.ico")).getImage());
+	public static void init() { 
 		System.out.println("██╗     ██╗██████╗ ██████╗  █████╗ ██████╗ ██╗   ██╗██████╗");
 		System.out.println("██║     ██║██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝╚════██╗");
 		System.out.println("██║     ██║██████╔╝██████╔╝███████║██████╔╝ ╚████╔╝   ▄███╔╝");
@@ -43,7 +41,26 @@ public class LoginFrame extends JFrame {
 		System.out.println("╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝     ╚═╝   ");
 		System.out.println("=============================================================");
 		System.out.println("欢迎使用图书管理系统，Version 0.8.1 | " + Utils.getCurrentTime(""));
-		
+		EventQueue.invokeLater(new Runnable() { 
+			public void run() { 
+				try { 
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+					//UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
+					LoginFrame frame = new LoginFrame();
+					frame.setVisible(true); 
+				} catch (Exception e) { 
+					e.printStackTrace(); 
+				}
+			} 
+		});
+	}
+	
+	/**
+	 * Create the frame.
+	 */
+	public LoginFrame() {
+		this.setIconImage(new ImageIcon(LoginFrame.class.getResource("/com/booksys/ui/image/library.ico")).getImage());
 		getContentPane().setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		setTitle("图书管理系统");
 		setResizable(false);
@@ -75,11 +92,11 @@ public class LoginFrame extends JFrame {
 				switch(Utils.authentication(id, pass, Data.readerList)) {
 					case 1: {
 						dispose();
-						new ReaderFrame().init();
+						ReaderFrame.init(id);
 					}break;
 					case 0: {
 						dispose();
-						new AdminFrame().init();
+						AdminFrame.init();
 					}break;
 					case -1: {
 						JOptionPane.showMessageDialog(null, "用户名或密码错误！", "认证失败", JOptionPane.ERROR_MESSAGE);

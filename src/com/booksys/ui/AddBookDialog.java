@@ -34,7 +34,7 @@ public class AddBookDialog extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public void init() {
+	public static void init() {
 		try {
 			AddBookDialog dialog = new AddBookDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -103,29 +103,29 @@ public class AddBookDialog extends JDialog {
 					}
 				});
 				buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+				{
+					JButton okButton = new JButton("提交");
+					okButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String no = noField.getText();
+							String name = nameField.getText();
+							String author = authorField.getText();
+							int num = Integer.parseInt(numField.getText());
+							if(Utils.isBookNo(no) && num >= 0) {
+								Operation.addBook(Data.bookList, new Book(no, name, author, num));
+								JOptionPane.showMessageDialog(null, "添加成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+								dispose();
+							} else {
+								JOptionPane.showMessageDialog(null, "录入信息非法！", "添加失败", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					});
+					okButton.setActionCommand("OK");
+					buttonPane.add(okButton);
+					getRootPane().setDefaultButton(okButton);
+				}
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
-			{
-				JButton okButton = new JButton("提交");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						String no = noField.getText();
-						String name = nameField.getText();
-						String author = authorField.getText();
-						int num = Integer.parseInt(numField.getText());
-						if(Utils.isBookNo(no) && num >= 0) {
-							Operation.addBook(Data.bookList, new Book(no, name, author, num));
-							JOptionPane.showMessageDialog(null, "添加成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
-							dispose();
-						} else {
-							JOptionPane.showMessageDialog(null, "录入信息非法！", "添加失败", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
 			}
 		}
 	}

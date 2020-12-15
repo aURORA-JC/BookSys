@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <booklist> 
   <book> 
     <no>ISBN 978-7-302-46425-9</no>  
@@ -11,7 +12,7 @@
     <no>ISBN 978-7-04-041908-5</no>  
     <name>离散数学（第2版）</name>  
     <author>屈婉玲 耿素云 张立昂</author>  
-    <inshop>9</inshop>  
+    <inshop>10</inshop>  
     <total>10</total> 
   </book>  
   <book> 
@@ -25,6 +26,13 @@
     <no>ISBN 978-7-115-37950-4</no>  
     <name>数据结构 C语言版 第2版</name>  
     <author>严蔚敏 李冬梅 吴伟民</author>  
+    <inshop>10</inshop>  
+    <total>10</total> 
+  </book>  
+  <book> 
+    <no>ISBN 978-7-04-039663-8</no>  
+    <name>高等数学 第七版 上册</name>  
+    <author>同济大学数学系</author>  
     <inshop>10</inshop>  
     <total>10</total> 
   </book> 
