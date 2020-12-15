@@ -27,7 +27,7 @@ public class Data {
 	public static Vector<String> readerTitle = new Vector<String>();
 	public static Vector<String> borrowTitle = new Vector<String>();
 	
-	public static void initDataTitle() {
+	public static void initData() {
 		bookTitle.add("书号");
 		bookTitle.add("书名");
 		bookTitle.add("作者");
@@ -38,8 +38,8 @@ public class Data {
 		readerTitle.add("密码");
 		readerTitle.add("级别");
 		
-		borrowTitle.add("读者ID");
 		borrowTitle.add("借阅书号");
+		borrowTitle.add("读者ID");
 		
 		Operation.getBookData(bookList);
 		Operation.getReaderDate(readerList);

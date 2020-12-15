@@ -23,7 +23,6 @@ public class Operation {
 		Node tmp = l.getHeadNode();
 		while(tmp != null) {
 			Book book = tmp.getBookData();
-			System.out.println(book.getBookNo() + book.getBookName() + book.getBookAuthor() + book.getBookInShopNum() + book.getBookNum());
 			Vector<String> b = new Vector<String>();
 			b.add(book.getBookNo());
 			b.add(book.getBookName());
@@ -40,7 +39,6 @@ public class Operation {
 		Node tmp = l.getHeadNode();
 		while(tmp != null) {
 			Reader reader = tmp.getReaderData();
-			System.out.println(reader.getReaderId() + reader.getReaderPasswd() + reader.getReaderLevel());
 			Vector<String> r = new Vector<String>();
 			r.add(String.valueOf(reader.getReaderId()));
 			r.add(reader.getReaderPasswd());
@@ -58,7 +56,6 @@ public class Operation {
 	public static void getBorrowData(LinkedList l) {
 		Node tmp = l.getHeadNode();
 		while (tmp != null) {
-			System.out.println(tmp.getBookNo() + tmp.getReaderNo());
 			Vector<String> b = new Vector<String>();
 			b.add(tmp.getBookNo());
 			b.add(String.valueOf(tmp.getReaderNo()));
@@ -91,13 +88,15 @@ public class Operation {
 		if (l.searchNodeIndex(b.getBookNo()) == -1) {
 			l.addNode(new Node(b));
 			IOStream.bookAdder(b);
-			System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：书本添加完毕");
 		} else {
 			Book book = l.searchNode(b.getBookNo()).getBookData();
+			book.setBookInShopNum(book.getBookInShopNum() + b.getBookInShopNum());
 			book.setBookNum(book.getBookNum() + b.getBookNum());
 			IOStream.bookUpdater(book);
-			System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：库存补充完毕");
 		}
+		Data.bookData.clear();
+		getBookData(l);
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：添加完毕");
 	}
 	
 	public static boolean createReader(LinkedList l, int id, String pass) {

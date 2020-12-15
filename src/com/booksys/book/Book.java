@@ -52,11 +52,11 @@ public class Book {
 	}
 	
 	public void setBookInShopNum(int _num) {
-		this.bookInShopNum += _num;
+		this.bookInShopNum = _num;
 	}
 	
 	public void setBookNum(int _num) {
-		this.bookNum += _num;
+		this.bookNum = _num;
 	}
 	
 	public boolean equals(Book b) {
