@@ -10,6 +10,8 @@ package com.booksys.sys;
 
 import java.awt.EventQueue;
 
+import javax.swing.UIManager;
+
 import com.booksys.ui.LoginFrame;
 
 public class BookSys {
@@ -17,6 +19,9 @@ public class BookSys {
 		EventQueue.invokeLater(new Runnable() { 
 			public void run() { 
 				try { 
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+					//UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true); 
 				} catch (Exception e) { 

@@ -10,6 +10,7 @@ package com.booksys.ui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,7 +18,6 @@ import javax.swing.JOptionPane;
 
 import com.booksys.data.Data;
 import com.booksys.io.IOStream;
-import com.booksys.storage.LinkedList;
 import com.booksys.utils.Utils;
 
 import java.awt.Font;
@@ -28,12 +28,13 @@ import java.awt.event.ActionEvent;
 public class LoginFrame extends JFrame {
 	private static final long serialVersionUID = -4020831753619395032L;
 	private JTextField usrNameField;
-	private JTextField passwdField;
+	private JPasswordField passwdField;
 
 	/**
 	 * Create the frame.
 	 */
 	public LoginFrame() {
+		this.setIconImage(new ImageIcon(LoginFrame.class.getResource("/com/booksys/ui/image/library.ico")).getImage());
 		System.out.println("██╗     ██╗██████╗ ██████╗  █████╗ ██████╗ ██╗   ██╗██████╗");
 		System.out.println("██║     ██║██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝╚════██╗");
 		System.out.println("██║     ██║██████╔╝██████╔╝███████║██████╔╝ ╚████╔╝   ▄███╔╝");
@@ -61,7 +62,7 @@ public class LoginFrame extends JFrame {
 		loginPanel.add(usrNameField);
 		usrNameField.setColumns(10);
 		
-		passwdField = new JTextField();
+		passwdField = new JPasswordField();
 		passwdField.setBounds(140, 165, 225, 30);
 		loginPanel.add(passwdField);
 		passwdField.setColumns(10);
@@ -70,16 +71,18 @@ public class LoginFrame extends JFrame {
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id = Integer.parseInt(usrNameField.getText());
-				String pass = passwdField.getText();
+				String pass = String.valueOf(passwdField.getPassword());
 				switch(Utils.authentication(id, pass, Data.readerList)) {
 					case 1: {
-						
+						dispose();
+						new ReaderFrame().init();
 					}break;
 					case 0: {
-						
+						dispose();
+						new AdminFrame().init();
 					}break;
 					case -1: {
-						JOptionPane.showMessageDialog(null, "用户名或密码错误", "认证失败", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "用户名或密码错误！", "认证失败", JOptionPane.ERROR_MESSAGE);
 					}break;
 				}
 			}
@@ -114,7 +117,6 @@ public class LoginFrame extends JFrame {
 		loginPanel.add(regBtn);
 		
 		IOStream.readerReader(Data.readerList);
-		System.out.println(" - " + Utils.getCurrentTime("time") + " | 用户信息载入完成");
-		System.out.println(" - " + Utils.getCurrentTime("time") + " | 登录界面初始化完成");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | 前端服务：登录界面初始化完成");
 	}
 }

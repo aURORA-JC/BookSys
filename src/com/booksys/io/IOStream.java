@@ -40,7 +40,6 @@ public class IOStream {
 				String author = el.elementText("author");
 				int inshop = Integer.parseInt(el.elementText("inshop"));
 				int total = Integer.parseInt(el.elementText("total"));
-				//System.out.println(no + name + author + inshop + total);
 				l.addNode(new Node(new Book(no, name, author, inshop, total)));
 			}
 		} catch (NumberFormatException e) {
@@ -58,7 +57,6 @@ public class IOStream {
 				int id = Integer.parseInt(el.elementText("id"));
 				String passwd = el.elementText("passwd");
 				int level = Integer.parseInt(el.elementText("level"));
-				//System.out.println(id + passwd + level);
 				l.addNode(new Node(new Reader(id, passwd, level)));
 			}
 		} catch (NumberFormatException e) {
@@ -75,7 +73,6 @@ public class IOStream {
 			for (Element el : elements) {
 				String no = el.elementText("no");
 				int id = Integer.parseInt(el.elementText("id"));
-				//System.out.println(no + id);
 				l.addNode(new Node(no, id));
 			}
 		} catch (NumberFormatException e) {
@@ -240,7 +237,7 @@ public class IOStream {
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
-		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：读取Document对象");
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：Document对象读取完毕");
 		return doc;
 	}
 	
