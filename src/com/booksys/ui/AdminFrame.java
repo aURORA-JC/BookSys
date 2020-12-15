@@ -10,10 +10,12 @@ import javax.swing.border.EmptyBorder;
 
 import com.booksys.data.Data;
 import com.booksys.io.IOStream;
+import com.booksys.utils.Utils;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -31,13 +33,13 @@ public class AdminFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public void init() {
+	public static void init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					IOStream.bookReader(Data.bookList);
 					IOStream.borrowReader(Data.borrowList);
-					Data.initData();
+					Data.initData("admin");
 					AdminFrame frame = new AdminFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -71,13 +73,27 @@ public class AdminFrame extends JFrame {
 		JMenu sysMenu = new JMenu("功能");
 		menuBar.add(sysMenu);
 		
-		JMenuItem exitItem = new JMenuItem("退出");
+		JMenuItem exitItem = new JMenuItem("退出系统");
 		exitItem.setIcon(null);
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(" - " + Utils.getCurrentTime("time") + " | 主服务：退出");
 				System.exit(0);
 			}
 		});
+		
+		JMenuItem logOutItem = new JMenuItem("注销登录");
+		logOutItem.setIcon(null);
+		logOutItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				JOptionPane.showMessageDialog(null, "注销成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+				Data.cleanData();
+				System.out.println(" - " + Utils.getCurrentTime("time") + " | 认证服务：角色注销完毕");
+				LoginFrame.init();
+			}
+		});
+		sysMenu.add(logOutItem);
 		sysMenu.add(exitItem);
 		
 		JMenu helpMenu = new JMenu("帮助");
@@ -99,6 +115,7 @@ public class AdminFrame extends JFrame {
 		bookTable = new JTable(Data.bookData, Data.bookTitle);
 		bookTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		bookTable.getTableHeader().setReorderingAllowed(false);
+		bookTable.setEnabled(false);
 		bookScrollPane.setViewportView(bookTable);
 		
 		JScrollPane readerScrollPane = new JScrollPane();
@@ -108,6 +125,7 @@ public class AdminFrame extends JFrame {
 		readerTable = new JTable(Data.readerData, Data.readerTitle);
 		readerTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		readerTable.getTableHeader().setReorderingAllowed(false);
+		readerTable.setEnabled(false);
 		readerScrollPane.setViewportView(readerTable);
 		
 		JScrollPane borrowScrollPane = new JScrollPane();
@@ -123,11 +141,20 @@ public class AdminFrame extends JFrame {
 		JButton addBookBtn = new JButton("添加书目");
 		addBookBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AddBookDialog().init();
+				AddBookDialog.init();
 				bookTable.updateUI();
 			}
 		});
 		addBookBtn.setBounds(0, 24, 93, 23);
 		contentPane.add(addBookBtn);
+		
+		JButton flashBtn = new JButton("刷新数据");
+		flashBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bookTable.updateUI();
+			}
+		});
+		flashBtn.setBounds(499, 24, 93, 23);
+		contentPane.add(flashBtn);
 	}
 }

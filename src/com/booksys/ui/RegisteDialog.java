@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.booksys.data.Data;
 import com.booksys.operation.Operation;
-import com.booksys.utils.Utils;
 
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -94,32 +93,32 @@ public class RegisteDialog extends JDialog {
 					}
 				});
 				buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+				{
+					JButton okButton = new JButton("注册");
+					okButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							long id = Long.parseLong(idField.getText());
+							String passwd = String.valueOf(passwdField.getPassword());
+							String repasswd = String.valueOf(rePasswdField.getPassword());
+							if (passwd.equals(repasswd) && id >= 10000000000l && id <= 19999999999l) {
+								if (Operation.createReader(Data.readerList, id, passwd)) {
+									JOptionPane.showMessageDialog(null, "注册成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+									ReaderFrame.init(id);
+									dispose();
+								} else {
+									JOptionPane.showMessageDialog(null, "手机号已存在！", "添加失败", JOptionPane.ERROR_MESSAGE);
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "录入信息非法！", "添加失败", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					});
+					okButton.setActionCommand("OK");
+					buttonPane.add(okButton);
+					getRootPane().setDefaultButton(okButton);
+				}
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
-			{
-				JButton okButton = new JButton("注册");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						long id = Long.parseLong(idField.getText());
-						String passwd = String.valueOf(passwdField.getPassword());
-						String repasswd = String.valueOf(rePasswdField.getPassword());
-						if (passwd.equals(repasswd) && id >= 10000000000l && id <= 19999999999l) {
-							if (Operation.createReader(Data.readerList, id, passwd)) {
-								JOptionPane.showMessageDialog(null, "注册成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
-								new ReaderFrame().init();
-								dispose();
-							} else {
-								JOptionPane.showMessageDialog(null, "手机号已存在！", "添加失败", JOptionPane.ERROR_MESSAGE);
-							}
-						} else {
-							JOptionPane.showMessageDialog(null, "录入信息非法！", "添加失败", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
 			}
 		}
 	}

@@ -72,6 +72,10 @@ public class Operation {
 		book.setBookInShopNum(book.getBookInShopNum() - 1);
 		IOStream.borrowAdder(reader, book);
 		IOStream.bookUpdater(book);
+		Data.borrowData.clear();
+		Data.bookData.clear();
+		getBorrowData(borl);
+		getBookData(bool);
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：借阅完毕");
 	}
 	
@@ -81,6 +85,10 @@ public class Operation {
 		book.setBookInShopNum(book.getBookInShopNum() + 1);
 		IOStream.borrowDeleter(real.searchNode(id).getReaderData(), bool.searchNode(s).getBookData());
 		IOStream.bookUpdater(book);
+		Data.borrowData.clear();
+		Data.bookData.clear();
+		getBorrowData(borl);
+		getBookData(bool);
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | 库存管理：还书完毕");
 	}
 	

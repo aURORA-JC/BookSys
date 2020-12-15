@@ -81,6 +81,24 @@ public class IOStream {
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：借书记录读取完毕");
 	}
 	
+	public static void personBorrowReader(LinkedList l, long _id) {
+		try {
+			doc = getDocument("Borrow.xml");
+			Element root = doc.getRootElement();
+			List<Element> elements = root.elements("ticket");
+			for (Element el : elements) {
+				String no = el.elementText("no");
+				long id = Long.parseLong(el.elementText("id"));
+				if (id == _id) {
+					l.addNode(new Node(no, id));
+				}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：借书记录读取完毕");
+	}
+	
 	public static void bookAdder(Book b) {
 		doc = getDocument("Books.xml");
 		Element root = doc.getRootElement();
@@ -168,7 +186,7 @@ public class IOStream {
 		Element root = doc.getRootElement();
 		List<Element> elements = root.elements("ticket");
 		for (Element el : elements) {
-			int id = Integer.parseInt(el.elementText("id"));
+			long id = Long.parseLong(el.elementText("id"));
 			String no = el.elementText("no");
 			if (id == r.getReaderId() && no.equals(b.getBookNo())) {
 				el.getParent().remove(el);
@@ -176,7 +194,7 @@ public class IOStream {
 			}
 		}
 		
-		xmlSaver("Borrows.xml");
+		xmlSaver("Borrow.xml");
 		System.out.println(" - " + Utils.getCurrentTime("time") + " | IO服务：借书记录删除完毕");
 	}
 	

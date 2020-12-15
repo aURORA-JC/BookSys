@@ -71,7 +71,7 @@ public class AboutDialog extends JDialog {
 			contentPanel.add(copyrightLabel);
 		}
 		{
-			JLabel thanksLabel = new JLabel("XML 解析组建基于 <dom4j> 封装");
+			JLabel thanksLabel = new JLabel("XML 解析组件基于 <dom4j> 封装");
 			thanksLabel.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			thanksLabel.setBounds(105, 90, 254, 15);
 			contentPanel.add(thanksLabel);

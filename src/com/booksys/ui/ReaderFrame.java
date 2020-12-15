@@ -19,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JTable;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import java.awt.Toolkit;
 
@@ -32,14 +33,14 @@ public class ReaderFrame extends JFrame {
 	 * Launch the application.
 	 * @return 
 	 */
-	public void init() {
+	public static void init(long l) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					IOStream.bookReader(Data.bookList);
-					IOStream.borrowReader(Data.borrowList);
-					Data.initData();
-					ReaderFrame frame = new ReaderFrame();
+					IOStream.personBorrowReader(Data.borrowList, l);
+					Data.initData("");
+					ReaderFrame frame = new ReaderFrame(l);
 					frame.setVisible(true);
 					System.out.println(" - " + Utils.getCurrentTime("time") + " | 前端服务：读者界面初始化完成");
 				} catch (Exception e) {
@@ -52,7 +53,7 @@ public class ReaderFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ReaderFrame() {
+	public ReaderFrame(long l) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ReaderFrame.class.getResource("/com/booksys/ui/image/library.ico")));
 		setResizable(false);
 		setLocation(new Point(100, 200));
@@ -67,6 +68,13 @@ public class ReaderFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton borrowBtn = new JButton("借阅书籍");
+		borrowBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BorrowDialog.init(l);
+				bookTable.updateUI();
+				borrowTable.updateUI();
+			}
+		});
 		borrowBtn.setBounds(0, 24, 93, 23);
 		contentPane.add(borrowBtn);
 		
@@ -74,6 +82,9 @@ public class ReaderFrame extends JFrame {
 		returnBtn.setBounds(0, 258, 93, 23);
 		returnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ReturnDialog.init(l);
+				bookTable.updateUI();
+				borrowTable.updateUI();
 			}
 		});
 		contentPane.add(returnBtn);
@@ -86,13 +97,26 @@ public class ReaderFrame extends JFrame {
 		JMenu sysMenu = new JMenu("功能");
 		menuBar.add(sysMenu);
 		
-		JMenuItem exitItem = new JMenuItem("退出");
+		JMenuItem exitItem = new JMenuItem("退出系统");
 		exitItem.setIcon(null);
 		exitItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(" - " + Utils.getCurrentTime("time") + " | 主服务：退出");
 				System.exit(0);
 			}
 		});
+		
+		JMenuItem logOutItem = new JMenuItem("注销登录");
+		logOutItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				JOptionPane.showMessageDialog(null, "注销成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+				Data.cleanData();
+				System.out.println(" - " + Utils.getCurrentTime("time") + " | 认证服务：角色注销完毕");
+				LoginFrame.init();
+			}
+		});
+		sysMenu.add(logOutItem);
 		exitItem.setSelectedIcon(null);
 		sysMenu.add(exitItem);
 		
@@ -117,6 +141,7 @@ public class ReaderFrame extends JFrame {
 		bookTable = new JTable(Data.bookData, Data.bookTitle);
 		bookTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		bookTable.getTableHeader().setReorderingAllowed(false);
+		bookTable.setEnabled(false);
 		bookScrollPane.setViewportView(bookTable);
 		
 		JScrollPane borrowScrollPane = new JScrollPane();
@@ -126,6 +151,17 @@ public class ReaderFrame extends JFrame {
 		borrowTable = new JTable(Data.borrowData, Data.borrowTitle);
 		borrowTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		borrowTable.getTableHeader().setReorderingAllowed(false);
+		borrowTable.setEnabled(false);
 		borrowScrollPane.setViewportView(borrowTable);
+		
+		JButton flashBtn = new JButton("刷新数据");
+		flashBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bookTable.updateUI();
+				borrowTable.updateUI();
+			}
+		});
+		flashBtn.setBounds(499, 24, 93, 23);
+		contentPane.add(flashBtn);
 	}
 }
